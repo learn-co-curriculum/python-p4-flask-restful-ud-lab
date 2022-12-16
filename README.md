@@ -33,10 +33,10 @@
 ## Introduction
 
 In this lab, we'll be building an API for a plant store! In addition to our
-usual Rails code, there is code for a React frontend application in the `client`
+usual Flask code, there is code for a React frontend application in the `client`
 directory.
 
-The code for the frontend application is done. Your job is to create the Rails
+The code for the frontend application is done. Your job is to create the Flask
 API so that the `fetch` requests on the frontend work successfully.
 
 ***
@@ -55,14 +55,14 @@ Using `--prefix client` will run the npm command within the `client` directory.
 To set up your backend, run:
 
 ```console
-$ bundle install
+$ pipenv install; pipenv shell
 ```
 
-To see how the React application and Rails API are interacting, you can run the
-Rails application in one terminal by running:
+To see how the React application and Flask API are interacting, you can run the
+Flask application in one terminal by running:
 
 ```console
-$ rails s
+$ python app.py
 ```
 
 Then, [open another terminal][new terminal] and run React:
@@ -76,7 +76,7 @@ $ npm start --prefix client
 Each application will run on its own port on `localhost`:
 
 - React: [http://localhost:4000](http://localhost:4000)
-- Rails: [http://localhost:3000](http://localhost:3000)
+- Flask: [http://localhost:5555](http://localhost:5555)
 
 Take a look through the components in the `client/src/components/` folder to get
 a feel for what our app does. Note that the `fetch` requests in the frontend (in
@@ -104,18 +104,13 @@ Create a `Plant` model that matches this specification:
 | image       | string    |
 | price       | decimal   |
 
-**If you use a Rails generator, don't forget to pass the `--no-test-framework`
-argument!**
-
-After creating the `Plant` model, you can run `rails db:migrate db:seed` to run
-your migration and add some sample data to your database.
-
-Check your progress by running `rails c` and verifying that the plants were
-created successfully!
+After creating the `Plant` model, you can run `flask db revision --autogenerate
+-m'<your message'>` to create your migration, `flask db upgrade` to run it, and
+`python seed.py` to add some sample data to your database.
 
 ### Routes
 
-Your API should have the following routes as well as the associated controller
+Your API should have the following routes as well as the associated
 actions that return the appropriate JSON data:
 
 #### Index Route
